@@ -1,4 +1,8 @@
-public class WooriBank implements Bank{
+package HardMisson;
+
+import HardMisson.Bank;
+
+public class WooriBank implements Bank {
 
     int currentMoney;
     String telephone;

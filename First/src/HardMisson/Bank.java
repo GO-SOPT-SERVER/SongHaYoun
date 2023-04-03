@@ -1,3 +1,5 @@
+package HardMisson;
+
 public interface Bank {
     public abstract void deposit(int money);
 
