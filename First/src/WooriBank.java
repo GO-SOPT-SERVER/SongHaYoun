@@ -1,9 +1,15 @@
 public class WooriBank implements Bank{
 
     int currentMoney;
-    int telephone;
-    int webUrl;
+    String telephone;
+    String webUrl;
 
+    public WooriBank(int currentMoney,String telephone,String webUrl){
+        this.currentMoney=currentMoney;
+        this.telephone=telephone;
+        this.webUrl=webUrl;
+        System.out.println("은행 생성완료!");
+    }
     @Override
     public void deposit(int money) {
         this.currentMoney=this.currentMoney+money;
