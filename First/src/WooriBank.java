@@ -12,8 +12,12 @@ public class WooriBank implements Bank{
 
     @Override
     public void withdraw(int money){
+        if(this.currentMoney-money<0){
+            System.out.println("잔고가 부족해 출금할 수 없습니다!");
+        }
+        else{
         this.currentMoney=this.currentMoney-money;
-        System.out.println(money+"만큼 출금되었습니다!");
+        System.out.println(money+"만큼 출금되었습니다!");}
     };
     @Override
     public void checkMoney(){
