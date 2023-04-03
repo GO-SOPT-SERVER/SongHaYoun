@@ -10,6 +10,14 @@ public class Main {
         firstGS.addVisitorCount();
 
         firstGS.printConvenienceStoreInfo();
+
+        Calculator calculator = new Calculator();
+
+        int intResult = calculator.add(1, 10);
+        double doubleResult = calculator.add(1, 10);
+
+        System.out.println(intResult);
+        System.out.println(doubleResult);
     }
 }
 
