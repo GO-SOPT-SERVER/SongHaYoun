@@ -8,7 +8,4 @@ public class BankUser {
         wooriBank.checkMoney();
         wooriBank.withdraw(2000);// 에러 처리 발생~
     }
-
-
-
 }
