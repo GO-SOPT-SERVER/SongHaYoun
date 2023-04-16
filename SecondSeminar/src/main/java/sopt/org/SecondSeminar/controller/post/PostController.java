@@ -1,7 +1,11 @@
 package sopt.org.SecondSeminar.controller.post;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import sopt.org.SecondSeminar.controller.post.dto.request.PostRequestDto;
 import sopt.org.SecondSeminar.controller.post.dto.response.PostResponseDto;
 import sopt.org.SecondSeminar.domain.Post;
@@ -28,16 +32,19 @@ public class PostController {
         return postResponseDto;
     }
     @GetMapping("/post")
-    public Object getPostByTitle(@RequestParam final String title){
+    public ResponseEntity getPostByTitle(@RequestParam final String title){
         for(int i=0;i<postList.size();i++){
             if(postList.get(i).getTitle().equals(title)){
                 Post post=postList.get(i);
+                HttpHeaders httpHeaders=new HttpHeaders();
                 PostResponseDto postResponseDto=PostResponseDto.newInstance((post.getTitle()),post.getCreate_user(),post.getContent());
-                return postResponseDto;
+                return new ResponseEntity(postResponseDto,httpHeaders, HttpStatus.OK);
             }
         }
 
-        return "검색된 데이터가 없습니다.";
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "entity not found"
+        );
     }
 
 
