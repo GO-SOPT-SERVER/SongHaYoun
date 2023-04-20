@@ -41,6 +41,21 @@ public class MenuController {
 
         return new ResponseEntity(responseMenuDto,httpHeaders,HttpStatus.OK);
     }
+
+    @PutMapping("/menu/{menuId}")
+    public ResponseEntity putMenu(@PathVariable final int menuId,@RequestBody RequestMenuDto requestMenuDto){
+        if(menuList.size()<menuId){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
+        Menu menu=new Menu(requestMenuDto.getName(),requestMenuDto.getPrice());
+        menuList.set(menuId-1,menu);
+        ResponseMenuDto responseMenuDto=ResponseMenuDto.newInstance(menuList.get(menuId-1).getName(),menuList.get(menuId-1).getPrice());
+        HttpHeaders httpHeaders=new HttpHeaders();
+        return new ResponseEntity(responseMenuDto,httpHeaders,HttpStatus.OK);
+    }
+
     @DeleteMapping("/menu")
     public String deleteMenu(@RequestParam final String name){
 
