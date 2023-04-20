@@ -41,6 +41,26 @@ public class MenuController {
 
         return new ResponseEntity(responseMenuDto,httpHeaders,HttpStatus.OK);
     }
+    @DeleteMapping("/menu")
+    public String deleteMenu(@RequestParam final String name){
+
+        boolean isDeleted=false;
+        Menu delMenu=null;
+        for (Menu menu:menuList) {
+            if(menu.getName().equals(name)) {
+                isDeleted = true;
+                delMenu=menu;
+            }
+        }
+        menuList.remove(delMenu);
+
+        if(isDeleted==false){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
+        return name+"을 삭제했습니다.";
+    }
 
 
 }
