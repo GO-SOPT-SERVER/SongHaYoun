@@ -2,6 +2,7 @@ package sopt.org.SecondSeminar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import sopt.org.SecondSeminar.controller.menu.dto.request.RequestMenuDto;
 import sopt.org.SecondSeminar.domain.Menu;
 import sopt.org.SecondSeminar.domain.Post;
 import sopt.org.SecondSeminar.domain.User;

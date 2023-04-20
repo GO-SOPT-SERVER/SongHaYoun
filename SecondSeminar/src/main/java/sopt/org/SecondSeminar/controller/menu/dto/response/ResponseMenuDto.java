@@ -9,4 +9,8 @@ import lombok.Getter;
 public class ResponseMenuDto {
     private String name;
     private int price;
+
+    public static ResponseMenuDto newInstance(String name,int price){
+        return new ResponseMenuDto(name,price);
+    }
 }
