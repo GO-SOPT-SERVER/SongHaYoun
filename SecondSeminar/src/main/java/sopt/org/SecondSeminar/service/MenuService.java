@@ -13,7 +13,7 @@ public class MenuService {
         Menu menu=new Menu(request.getName(),request.getPrice());
 
         menuList.add(menu);
-        return menu.getName()+"메뉴가 등록되었습니다!"
+        return menu.getName()+"메뉴가 등록되었습니다!";
 
     }
 }
