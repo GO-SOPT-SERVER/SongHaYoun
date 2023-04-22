@@ -9,8 +9,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class User{
+@NoArgsConstructor
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
