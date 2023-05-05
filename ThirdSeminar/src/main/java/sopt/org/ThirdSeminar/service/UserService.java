@@ -26,4 +26,10 @@ public class UserService {
 
         return UserResponseDto.of(user.getId(), user.getNickname());
     }
+
+    public UserResponseDto search(Long userId){
+        User user=userRepository.getOne(userId);
+
+        return UserResponseDto.of(user.getId(),user.getNickname());
+    }
 }
