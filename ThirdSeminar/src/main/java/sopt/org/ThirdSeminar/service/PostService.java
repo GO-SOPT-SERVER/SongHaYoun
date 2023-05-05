@@ -28,8 +28,8 @@ public class PostService {
                 .content(postRequestDto.getContent())
                 .created_user(user)
                 .build();
-
-        return PostResponseDto.of(post.getTitle(),post.getContent(),user.getNickname());
+        postRepository.save(post);
+        return PostResponseDto.of(post.getId(),post.getTitle(),post.getContent(),user.getNickname());
     }
 
     @Transactional
@@ -38,7 +38,7 @@ public class PostService {
         Post post= postRepository.getOne(postId);
         User user=post.getCreated_user();
         System.out.println(user);
-        PostResponseDto postResponseDto=PostResponseDto.of(post.getTitle(),post.getContent(),user.getNickname());
+        PostResponseDto postResponseDto=PostResponseDto.of(post.getId(),post.getTitle(),post.getContent(),user.getNickname());
 
         return postResponseDto;
     }
@@ -52,7 +52,7 @@ public class PostService {
         for (Post post:postList
              ) {
             User user=post.getCreated_user();
-            responseList.add(PostResponseDto.of(post.getTitle(),post.getContent(),user.getNickname()));
+            responseList.add(PostResponseDto.of(post.getId(),post.getTitle(),post.getContent(),user.getNickname()));
             
         }
 

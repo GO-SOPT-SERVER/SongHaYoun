@@ -15,14 +15,13 @@ public class ControllerExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ApiResponseDto handleMethodArgumentNotValidException(final MethodArgumentNotValidException e){
+    protected ApiResponseDto handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
         return ApiResponseDto.error(ErrorStatus.VALIDATION_REQUEST_MISSING_EXCEPTION);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException.class)
-    protected ApiResponseDto handleEntityNotFoundException(final EntityNotFoundException e){
+    protected ApiResponseDto handleEntityNotFoundException(final EntityNotFoundException e) {
         return ApiResponseDto.error(ErrorStatus.NOT_FOUND_USER);
     }
-
 }

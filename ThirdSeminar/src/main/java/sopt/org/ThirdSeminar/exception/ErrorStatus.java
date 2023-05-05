@@ -15,7 +15,7 @@ BAD_REQUEST
     VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     VALIDATION_REQUEST_MISSING_EXCEPTION(HttpStatus.BAD_REQUEST, "요청값이 입력되지 않았습니다."),
 
-    NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "등록된 유저가 존재하지 않습니다."),
+    NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "검색 결과가 없습니다."),
     /*
     CONFLICT
      */
