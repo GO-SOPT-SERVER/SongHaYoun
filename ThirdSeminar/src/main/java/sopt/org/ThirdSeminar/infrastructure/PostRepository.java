@@ -12,6 +12,6 @@ public interface PostRepository extends Repository<Post,Long> {
 
     List<Post> findAllByTitle(String title);
 
-    Post findAllById(Long id);
+    Post getOne(Long id);
 
 }

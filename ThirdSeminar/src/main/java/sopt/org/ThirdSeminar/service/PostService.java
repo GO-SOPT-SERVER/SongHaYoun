@@ -10,6 +10,9 @@ import sopt.org.ThirdSeminar.domain.User;
 import sopt.org.ThirdSeminar.infrastructure.PostRepository;
 import sopt.org.ThirdSeminar.infrastructure.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -32,10 +35,27 @@ public class PostService {
     @Transactional
     public PostResponseDto search(Long postId){
 
-        Post post= postRepository.findAllById(postId);
+        Post post= postRepository.getOne(postId);
         User user=post.getCreated_user();
+        System.out.println(user);
         PostResponseDto postResponseDto=PostResponseDto.of(post.getTitle(),post.getContent(),user.getNickname());
 
         return postResponseDto;
+    }
+
+    @Transactional
+    public List<PostResponseDto> searchByTitle(String title){
+        List<Post> postList=postRepository.findAllByTitle(title);
+        
+        List<PostResponseDto> responseList=new ArrayList<PostResponseDto>();
+
+        for (Post post:postList
+             ) {
+            User user=post.getCreated_user();
+            responseList.add(PostResponseDto.of(post.getTitle(),post.getContent(),user.getNickname()));
+            
+        }
+
+        return responseList;
     }
 }
