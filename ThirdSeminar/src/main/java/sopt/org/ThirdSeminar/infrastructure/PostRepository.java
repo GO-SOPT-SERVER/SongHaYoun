@@ -10,7 +10,7 @@ public interface PostRepository extends Repository<Post,Long> {
 
     void save(Post post);
 
-    List<Post> findAllByPostTitle(String title);
+    List<Post> findAllByTitle(String title);
 
     Post findAllById(Long id);
 
