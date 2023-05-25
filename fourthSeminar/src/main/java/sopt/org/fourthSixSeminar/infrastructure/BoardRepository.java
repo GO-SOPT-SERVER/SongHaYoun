@@ -10,6 +10,7 @@ public interface BoardRepository extends Repository<Board, Long> {
 
     // READ
 
+
     // UPDATE
 
     // DELETE

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sopt.org.fourthSixSeminar.common.dto.ApiResponse;
+import sopt.org.fourthSixSeminar.config.jwt.JwtService;
 import sopt.org.fourthSixSeminar.controller.dto.request.BoardRequestDto;
 import sopt.org.fourthSixSeminar.exception.Success;
 import sopt.org.fourthSixSeminar.service.BoardService;
@@ -16,11 +17,12 @@ import javax.validation.Valid;
 public class BoardController {
 
     private final BoardService boardService;
-
+    private final JwtService jwtService;
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse create(@RequestBody @Valid final BoardRequestDto request) {
-        boardService.create(request);
+    public ApiResponse create( @RequestHeader("Authorization") String accessToken,@RequestBody @Valid final BoardRequestDto request) {
+
+        boardService.create(Long.parseLong(jwtService.getJwtContents(accessToken)),request);
         return ApiResponse.success(Success.CREATE_BOARD_SUCCESS);
     }
 }

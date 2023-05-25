@@ -8,6 +8,7 @@ import sopt.org.fourthSixSeminar.controller.dto.request.UserRequestDto;
 import sopt.org.fourthSixSeminar.controller.dto.response.UserResponseDto;
 import sopt.org.fourthSixSeminar.domain.User;
 import sopt.org.fourthSixSeminar.exception.Error;
+import sopt.org.fourthSixSeminar.exception.model.BadRequestException;
 import sopt.org.fourthSixSeminar.exception.model.ConflictException;
 import sopt.org.fourthSixSeminar.exception.model.NotFoundException;
 import sopt.org.fourthSixSeminar.infrastructure.UserRepository;
@@ -40,7 +41,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException(Error.NOT_FOUND_USER_EXCEPTION, Error.NOT_FOUND_USER_EXCEPTION.getMessage()));
 
         if (!user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException();
+            throw new BadRequestException(Error.INVALID_PASSWORD_EXCEPTION,Error.INVALID_PASSWORD_EXCEPTION.getMessage());
         }
 
         return user.getId();
