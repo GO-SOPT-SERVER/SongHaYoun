@@ -1,23 +1,23 @@
 package sopt.org.fourthSixSeminar.config.jwt;
 
-import lombok.Builder;
-import lombok.Getter;
-import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Id;
-
-@Getter
-@RedisHash(value="refreshToken", timeToLive = 60)
 public class RefreshToken {
 
     @Id
     private String refreshToken;
-    private Long userId;
+    private Long memberId;
 
-    @Builder
-    private RefreshToken(final String refreshToken,final Long userId){
-        this.refreshToken=refreshToken;
-        this.userId=userId;
+    public RefreshToken(final String refreshToken, final Long memberId) {
+        this.refreshToken = refreshToken;
+        this.memberId = memberId;
     }
 
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
 }
