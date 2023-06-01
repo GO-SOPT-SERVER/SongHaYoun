@@ -32,6 +32,14 @@ public class UserController {
     public ApiResponse<UserLoginResponseDto> login(@RequestBody @Valid final UserLoginRequestDto request){
         final Long userId=userService.login(request);
         final String token=jwtService.issuedToken(String.valueOf(userId));
-        return ApiResponse.success(Success.LOGIN_SUCCESS,UserLoginResponseDto.of(userId,token));
+        final String refresh=jwtService.generateRefreshToken(request);
+        return ApiResponse.success(Success.LOGIN_SUCCESS,UserLoginResponseDto.of(userId,token,refresh));
+    }
+
+    @PostMapping("/refresh")
+    @ResponseStatus(HttpStatus.OK)
+    public ApiResponse<String> refresh(@RequestBody @Valid final UserLoginRequestDto request){
+        String refresh=jwtService.generateRefreshToken(request);
+        return ApiResponse.success(Success.TOKEN_CREATED,refresh);
     }
 }

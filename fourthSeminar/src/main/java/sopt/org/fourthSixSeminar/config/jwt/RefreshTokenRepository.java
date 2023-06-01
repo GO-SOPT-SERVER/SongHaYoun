@@ -1,5 +1,6 @@
 package sopt.org.fourthSixSeminar.config.jwt;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class RefreshTokenRepository {
 
     private RedisTemplate redisTemplate;
-
+    public RefreshTokenRepository(final RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
     public void save(final RefreshToken refreshToken){
         ValueOperations<String,Long> valueOperations=redisTemplate.opsForValue();
         valueOperations.set(refreshToken.getRefreshToken(),refreshToken.getMemberId());
