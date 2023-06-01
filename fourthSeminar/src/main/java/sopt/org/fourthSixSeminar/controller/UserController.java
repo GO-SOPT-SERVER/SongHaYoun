@@ -38,8 +38,10 @@ public class UserController {
 
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<String> refresh(@RequestBody @Valid final UserLoginRequestDto request){
-        String refresh=jwtService.generateRefreshToken(request);
-        return ApiResponse.success(Success.TOKEN_CREATED,refresh);
+    public ApiResponse<String> refresh(@RequestHeader final String refreshToken){
+        final String access=jwtService.genereateAccessByRefresh(refreshToken);
+        return ApiResponse.success(Success.TOKEN_CREATED,access);
     }
+
+
 }

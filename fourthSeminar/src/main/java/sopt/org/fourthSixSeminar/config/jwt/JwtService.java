@@ -47,7 +47,13 @@ public class JwtService {
         jwtSecret = Base64.getEncoder()
                 .encodeToString(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
+    public String genereateAccessByRefresh(final String refresh){
+        RefreshToken refreshToken= refreshTokenRepository.findById(refresh)
+                .orElseThrow(()->(new UnauthorizedException(Error.NOT_FOUND_USER_EXCEPTION,"잘못된 토큰입니다.")));
+        String userId=String.valueOf(refreshToken.getMemberId());
 
+       return issuedToken(userId);
+    }
     // JWT 토큰 발급
     public String issuedToken(String userId) {
         final Date now = new Date();
@@ -56,7 +62,7 @@ public class JwtService {
         final Claims claims = Jwts.claims()
                 .setSubject("access_token")
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + 1000L));
+                .setExpiration(new Date(now.getTime() + 100*100* 1000L));
 
         //private claim 등록
         claims.put("userId", userId);
